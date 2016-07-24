@@ -1,8 +1,9 @@
 # tweetkiller
 
-WIP Python application that deletes your tweets
+Python application that deletes your tweets, either all of them, or only ones before a particular date.
 
-- Requires Python 3 (Built with 3.5.2)
+- Requires Python 3 (Developed with 3.5.2)
+- [`python-twitter` 3.1+](https://pypi.python.org/pypi/python-twitter/3.1) 
 
 # How to use
 
@@ -22,4 +23,4 @@ It does exactly what [Twitter](https://support.twitter.com/articles/18906) says 
 But be aware that:
 
 - Twitter may still retain copies of your Tweet in its database.
-- Third parties, such as [the Wayback Machine](https://archive.org/web/) and the Library of Congress, still have archives of your tweets. 
+- Third parties, such as [the Wayback Machine](https://archive.org/web/) and the United States Library of Congress, may still have archives of your tweets. 

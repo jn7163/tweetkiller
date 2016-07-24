@@ -2,19 +2,16 @@
 
 import csv, json, twitter
 
-''' 
-First, download your Twitter archive 
-<https://support.twitter.com/articles/20170160?lang=en>. 
-Expand that ZIP file and update the line below with the
-path to that file.
-''' 
+# First, download your Twitter archive 
+# <https://support.twitter.com/articles/20170160?lang=en>. 
+# Expand that ZIP file and update the line below with the
+# path to the tweets.csv file.
+# This file contains the identifiers for every tweet you've posted.
 
 PATH_TO_TWEETS = ''
 
-'''
-Next, create a Twitter app. <https://apps.twitter.com/>
-That's how you'll get your keys and secrets
-'''
+# Next, create a Twitter app. <https://apps.twitter.com/>
+# That's how you'll get your keys and secrets
 
 CONSUMER_KEY = ''
 CONSUMER_SECRET = ''
@@ -22,28 +19,57 @@ CONSUMER_SECRET = ''
 ACCESS_TOKEN = ''
 ACCESS_TOKEN_SECRET = ''
 
-MESSAGES = {
-	'success' : 'Successfully deleted http://twitter/{0}/status/{1}.',
-	'error' : 'Looks like tweet {0} was already deleted.'
-}
+# Delete tweets before this date in YYYY-MM-DD format
+BEFORE_DATE = ''
 
-# Deletes the tweet and prints a message.
+###### Stop editing
+
+# Deletes the tweet matching the tweetid passed.
 # Requires you to be authenticated
-def deletetweet(tweetid, messageobject, uname):
-	if(twitterapi):
-		try:
-			deletedobj = twitterapi.DestroyStatus(tweetid)
-		except:
-			print(messageobject['error'].format(tweetid))
-		print(messageobject['success'].format(uname, tweetid))
+def deletetweet(tweetid):
+	try:
+		deletedobj = twitterapi.DestroyStatus(tweetid)
+	except:
+		return False	
+# END deletetweet
+
+# Compares two dates
+def isbefore(basedate, dateinquestion):
+	return dateinquestion < basedate
+# END isbefore
+
+
+# Deletes a tweet if it's before a particular date
+def deletetweetifbefore(tweetid, tweettime, beforedate):
+	if isbefore(beforedate, tweettime):
+		return deletetweet(tweetid)	
+# END deletetweetifbefore
 	
+	
+def deletetweets(pathtotweets, beforedatecutoff = ''):
+	with open(pathtotweets) as tweetfile:
+		tweets = csv.DictReader(tweetfile)
+		
+		for row in tweets:
+			if beforedatecutoff:
+				deleted = deletetweetifbefore(row['tweet_id'], row['timestamp'], beforedatecutoff)
+			else:
+				deleted = deletetweet(row['tweet_id'])
 			
+			print deleted
+			
+			'''if deleted:
+				print('Successfully deleted http://twitter.com/{0}/status/{1}.'.format(authenticated.screen_name, row['tweet_id']))
+			else:
+				print('http://twitter.com/{}/status/{}, posted on {}, was not deleted.'.format(authenticated.screen_name, row['tweet_id'], row['timestamp']))
+			'''
+# End deletetweets	
+	
 # Initializes an API object
 twitterapi = twitter.Api(consumer_key=CONSUMER_KEY,
-			  consumer_secret=CONSUMER_SECRET,
-			  access_token_key=ACCESS_TOKEN,
-			  access_token_secret=ACCESS_TOKEN_SECRET)
-
+		  		consumer_secret=CONSUMER_SECRET,
+		  		access_token_key=ACCESS_TOKEN,
+		  		access_token_secret=ACCESS_TOKEN_SECRET)
 
 # Authenticates you (or not if your tokens are wrong / disabled)
 try:
@@ -51,8 +77,4 @@ try:
 except:
 	print("Your API keys, secrets, or tokens are either wrong or disabled.")
 
-with open(PATH_TO_TWEETS) as tweetfile:
-	tweets = csv.DictReader(tweetfile)
-	for row in tweets:
-		deletetweet(row['tweet_id'], MESSAGES, authenticated.screen_name)
-		
+deletetweets(PATH_TO_TWEETS, BEFORE_DATE)		
