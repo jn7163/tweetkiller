@@ -27,54 +27,48 @@ BEFORE_DATE = ''
 # Deletes the tweet matching the tweetid passed.
 # Requires you to be authenticated
 def deletetweet(tweetid):
-	try:
-		deletedobj = twitterapi.DestroyStatus(tweetid)
-	except:
-		return False	
+    try:
+        deletedobj = twitterapi.DestroyStatus(tweetid)
+    except:
+        return False    
 # END deletetweet
 
 # Compares two dates
 def isbefore(basedate, dateinquestion):
-	return dateinquestion < basedate
+    return dateinquestion < basedate
 # END isbefore
 
 
 # Deletes a tweet if it's before a particular date
 def deletetweetifbefore(tweetid, tweettime, beforedate):
-	if isbefore(beforedate, tweettime):
-		return deletetweet(tweetid)	
+    if isbefore(beforedate, tweettime):
+        return deletetweet(tweetid)    
 # END deletetweetifbefore
-	
-	
+    
+    
 def deletetweets(pathtotweets, beforedatecutoff = ''):
-	with open(pathtotweets) as tweetfile:
-		tweets = csv.DictReader(tweetfile)
-		
-		for row in tweets:
-			if beforedatecutoff:
-				deleted = deletetweetifbefore(row['tweet_id'], row['timestamp'], beforedatecutoff)
-			else:
-				deleted = deletetweet(row['tweet_id'])
-			
-			print deleted
-			
-			'''if deleted:
-				print('Successfully deleted http://twitter.com/{0}/status/{1}.'.format(authenticated.screen_name, row['tweet_id']))
-			else:
-				print('http://twitter.com/{}/status/{}, posted on {}, was not deleted.'.format(authenticated.screen_name, row['tweet_id'], row['timestamp']))
-			'''
-# End deletetweets	
-	
+    with open(pathtotweets) as tweetfile:
+        tweets = csv.DictReader(tweetfile)
+        
+        for row in tweets:
+            if beforedatecutoff:
+                deleted = deletetweetifbefore(row['tweet_id'], row['timestamp'], beforedatecutoff)
+            else:
+                deleted = deletetweet(row['tweet_id'])
+            
+            print deleted
+# End deletetweets    
+    
 # Initializes an API object
 twitterapi = twitter.Api(consumer_key=CONSUMER_KEY,
-		  		consumer_secret=CONSUMER_SECRET,
-		  		access_token_key=ACCESS_TOKEN,
-		  		access_token_secret=ACCESS_TOKEN_SECRET)
+                  consumer_secret=CONSUMER_SECRET,
+                  access_token_key=ACCESS_TOKEN,
+                  access_token_secret=ACCESS_TOKEN_SECRET)
 
 # Authenticates you (or not if your tokens are wrong / disabled)
 try:
-	authenticated = twitterapi.VerifyCredentials()
+    authenticated = twitterapi.VerifyCredentials()
 except:
-	print("Your API keys, secrets, or tokens are either wrong or disabled.")
+    print("Your API keys, secrets, or tokens are either wrong or disabled.")
 
-deletetweets(PATH_TO_TWEETS, BEFORE_DATE)		
+deletetweets(PATH_TO_TWEETS, BEFORE_DATE)        
