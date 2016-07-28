@@ -43,6 +43,7 @@ Be aware that:
 
 ## Caveats, disclaimers, no warranties
 
-This is a hastily-written-in-an-afternoon project by a Python n00b. There is no test suite. There are probably bugs. It will delete things, perhaps things you didn't want it to delete. Test yourself with a small batch of tweets. But I make no promises or warranties about its fitness
+This is a hastily-written-in-an-afternoon project by a Python n00b. There is no test suite. There are probably bugs. It will delete things. It might delete things you didn't want it to delete. Test yourself with a small batch of tweets. I make no promises or warranties about its fitness for a particular purpose.
+
 
  
