@@ -41,9 +41,9 @@ Be aware that:
 - Twitter may still retain copies of your Tweet in its database.
 - Third parties, such as [the Wayback Machine](https://archive.org/web/) and the United States Library of Congress, may still have archives of your tweets.
 
-## Caveats, disclaimers, no warranties
+## Disclaimer, no warranties
 
-This is a hastily-written-in-an-afternoon project by a Python n00b. There is no test suite. There are probably bugs. It will delete things. It might delete things you didn't want it to delete. Test yourself with a small batch of tweets. I make no promises or warranties about its fitness for a particular purpose.
+This is a hastily-written-in-an-afternoon project by a Python n00b. There is no test suite. There are probably bugs. It will delete things. It might delete things you didn't want it to delete. Test yourself with a small batch of tweets. It comes with no promises or warranties about its fitness for a particular purpose.
 
 
  
