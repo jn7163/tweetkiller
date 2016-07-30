@@ -26,6 +26,7 @@ import csv, json, twitter
 
 PATH_TO_TWEETS = ''
 
+
 # Next, create a Twitter app. <https://apps.twitter.com/>
 # That's how you'll get your keys and secrets
 
@@ -35,8 +36,10 @@ CONSUMER_SECRET = ''
 ACCESS_TOKEN = ''
 ACCESS_TOKEN_SECRET = ''
 
+
 # Delete tweets before this date in YYYY-MM-DD format
 BEFORE_DATE = False
+
 
 ###### Stop editing
 
@@ -45,6 +48,7 @@ BEFORE_DATE = False
 def deletetweet(tweetid):
     try:
         deletedobj = twitterapi.DestroyStatus(tweetid)
+        return tweetid
     except:
         return False    
 # END deletetweet
@@ -72,7 +76,7 @@ def deletetweets(pathtotweets, beforedatecutoff = ''):
             else:
                 deleted = deletetweet(row['tweet_id'])
             
-            print deleted
+            print("Tweet {} was deleted".format(deleted))
 # End deletetweets    
     
 # Initializes an API object
