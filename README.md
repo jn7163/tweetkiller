@@ -40,6 +40,7 @@ Be aware that:
 
 - Twitter may still retain copies of your Tweet in its database.
 - Third parties, such as [the Wayback Machine](https://archive.org/web/) and the United States Library of Congress, may still have archives of your tweets.
+- It _will not_ remove your retweets of other users' tweets. You'll have to undo those retweets separately. (Currently, this script does not do that.)
 
 ## Disclaimer, no warranties
 
