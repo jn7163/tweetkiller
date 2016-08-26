@@ -1,6 +1,6 @@
 # tweetkiller
 
-Python application that deletes your tweets, either all of them, or only ones before a particular date.
+Python script that deletes your tweets &#8212; either all of them, or only ones before a particular date.
 
 - Requires Python 3 (Developed with 3.5.2)
 - [`python-twitter` 3.1+](https://pypi.python.org/pypi/python-twitter/3.1) 

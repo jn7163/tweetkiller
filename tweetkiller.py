@@ -20,10 +20,10 @@ import csv
 import json
 import twitter
 
-from conf import PATH_TO_TWEETS
-from conf import CONSUMER_KEY, CONSUMER_SECRET
-from conf import ACCESS_TOKEN, ACCESS_TOKEN_SECRET
-from conf import BEFORE_DATE
+from tweetkillerconf import PATH_TO_TWEETS
+from tweetkillerconf import CONSUMER_KEY, CONSUMER_SECRET
+from tweetkillerconf import ACCESS_TOKEN, ACCESS_TOKEN_SECRET
+from tweetkillerconf import BEFORE_DATE
 
 # Deletes the tweet matching the tweetid passed.
 # Requires you to be authenticated
